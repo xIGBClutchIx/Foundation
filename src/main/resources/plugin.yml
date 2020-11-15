@@ -1,0 +1,6 @@
+name: Foundation
+version: 1.0.0
+description: This plugin that adds a more easy and extensionable API to Spigot.
+author: Clutch
+api-version: 1.16
+main: me.clutchy.foundation.FoundationStartup
