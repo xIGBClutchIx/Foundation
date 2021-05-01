@@ -1,8 +1,8 @@
 package me.clutchy.foundation;
 
-import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
@@ -130,7 +130,7 @@ public class LibraryDownloader {
     }
 
     private URL getUrl(Library library, boolean MD5) throws MalformedURLException {
-        if (library.repo == null || library.repo.trim().isEmpty()) library.repo = "https://jcenter.bintray.com/";
+        if (library.repo == null || library.repo.trim().isEmpty()) library.repo = "https://repo.maven.apache.org/maven2/";
         if (!library.repo.endsWith("/")) library.repo += "/";
         return new URL(library.repo + getPath(library) + getFileName(library, MD5));
     }
@@ -160,7 +160,7 @@ public class LibraryDownloader {
         return connection.getInputStream();
     }
 
-    public class Library implements Comparable<Library> {
+    public static class Library implements Comparable<Library> {
         private final String groupId;
         private final String artifactId;
         private final String version;

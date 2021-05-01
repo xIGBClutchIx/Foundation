@@ -2,17 +2,17 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 
 plugins {
-    kotlin("jvm") version "1.4.10"
+    kotlin("jvm") version "1.4.32"
 }
 
 repositories {
     mavenLocal()
-    jcenter()
+    mavenCentral()
     maven(url = "https://papermc.io/repo/repository/maven-public/")
 }
 
 dependencies {
-    implementation("com.destroystokyo.paper:paper-api:1.16.4-R0.1-SNAPSHOT")
+    implementation("com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT")
     implementation("org.reflections:reflections:0.9.12")
 }
 

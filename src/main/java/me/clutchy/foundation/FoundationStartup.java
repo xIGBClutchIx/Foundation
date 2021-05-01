@@ -4,7 +4,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class FoundationStartup extends JavaPlugin {
 
-    private LibraryDownloader libraryDownloader = new LibraryDownloader(getClassLoader(), getLogger());
+    private final LibraryDownloader libraryDownloader = new LibraryDownloader(getClassLoader(), getLogger());
     private Foundation foundation;
 
     @Override
