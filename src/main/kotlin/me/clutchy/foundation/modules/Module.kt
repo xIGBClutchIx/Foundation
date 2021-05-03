@@ -1,6 +1,6 @@
 package me.clutchy.foundation.modules
 
-class Module(val meta: ModuleInformation) {
+class Module(val name: String, val version: String) {
 
     fun onEnable() {
 

@@ -1,9 +1,24 @@
+import me.clutchy.dependenciesgen.gradle.DependenciesGen
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar;
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+    dependencies {
+        classpath("me.clutchy:DependenciesGen:1.0.1")
+    }
+}
+
 plugins {
     kotlin("jvm") version "1.4.32"
+    id("java")
+    id("com.github.johnrengelman.shadow") version "7.0.0"
 }
+apply(plugin = "me.clutchy.dependenciesgen")
 
 repositories {
     mavenLocal()
@@ -12,9 +27,25 @@ repositories {
 }
 
 dependencies {
-    implementation("com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT")
-    implementation("org.reflections:reflections:0.9.12")
+    api("me.clutchy:DependenciesGen:1.0.1")
+    api("com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT")
+    api("org.reflections:reflections:0.9.12")
 }
+
+configure<DependenciesGen> {
+    ignored = listOf("me.clutchy:DependenciesGen", "com.destroystokyo.paper:paper-api")
+}
+
+tasks.withType<ShadowJar> {
+    exclude("/me/clutchy/dependenciesgen/gradle/")
+    dependencies {
+        include(dependency("me.clutchy:DependenciesGen:1.0.1"))
+    }
+}
+
+// Default tasks for DependenciesGen
+tasks.getByName("classes").dependsOn(tasks.getByName("gen-dependencies"))
+tasks.getByName("build").dependsOn(tasks.getByName("shadowJar"))
 
 // Java 8
 tasks.withType<KotlinCompile> {
@@ -35,5 +66,5 @@ sourceSets.main {
     }
 }
 
-group = "me.clutchy.foundation"
+group = "me.clutchy"
 version = "0.0.1"

@@ -1,6 +1,5 @@
 package me.clutchy.foundation.modules
 
-import me.clutchy.foundation.LoadJarsUtil
 import org.bukkit.ChatColor
 import org.reflections.Reflections
 import java.nio.file.Path
@@ -18,7 +17,7 @@ class ModuleHandler(private val classLoader: ClassLoader, private val logger: Lo
         var moduleNames = emptyArray<String>()
         modulesFolder.toFile().walk().filter { it.isFile }.filter { it.extension == "jar" }.forEach {
             moduleNames += it.nameWithoutExtension
-            LoadJarsUtil.addFile(classLoader, logger, it)
+            //LoadJarsUtil.addFile(classLoader, logger, it)
         }
         // Log all modules
         if (moduleNames.isNotEmpty()) logger.info("Loaded modules: " + ChatColor.DARK_PURPLE + moduleNames.sortedArray().joinToString(ChatColor.RESET.toString() + ", " + ChatColor.DARK_PURPLE))
@@ -26,21 +25,22 @@ class ModuleHandler(private val classLoader: ClassLoader, private val logger: Lo
         val moduleClasses: Set<Class<out Module?>> = Reflections(classLoader).getSubTypesOf(Module::class.java)
         // Create and enable all modules
         moduleClasses.mapNotNull { moduleClass -> moduleClass.getConstructor().newInstance() }.forEach { module ->
-            logger.info("Enabling module: " + ChatColor.YELLOW + module.meta.name)
+            logger.info("Enabling module: " + ChatColor.YELLOW + module.name)
             module.onEnable()
-            logger.info("Enabled module: " + ChatColor.GREEN + module.meta.name)
-            modules[module.meta.name] = module
+            logger.info("Enabled module: " + ChatColor.GREEN + module.name)
+            modules[module.name] = module
         }
     }
 
     fun disableModules() = modules.keys.forEach { disableModule(it) }
 
+    @Suppress("MemberVisibilityCanBePrivate")
     fun disableModule(moduleName: String) {
         val module = modules[moduleName]
         if (module != null) {
-            logger.info("Disabling module: " + ChatColor.YELLOW + module.meta.name)
+            logger.info("Disabling module: " + ChatColor.YELLOW + module.name)
             module.onDisable()
-            logger.info("Disabled module: " + ChatColor.RED + module.meta.name)
+            logger.info("Disabled module: " + ChatColor.RED + module.name)
         }
         modules.remove(moduleName)
     }
