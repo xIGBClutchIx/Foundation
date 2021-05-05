@@ -3,22 +3,12 @@ import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar;
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 
-buildscript {
-    repositories {
-        mavenLocal()
-        mavenCentral()
-    }
-    dependencies {
-        classpath("me.clutchy:DependenciesGen:1.0.1")
-    }
-}
-
 plugins {
-    kotlin("jvm") version "1.4.32"
+    kotlin("jvm") version "1.5.0-RC"
     id("java")
     id("com.github.johnrengelman.shadow") version "7.0.0"
+    id("me.clutchy.dependenciesgen") version "1.0.1"
 }
-apply(plugin = "me.clutchy.dependenciesgen")
 
 repositories {
     mavenLocal()

@@ -13,7 +13,7 @@ public class FoundationStartup extends JavaPlugin {
     @Override
     public void onEnable() {
         dependencyDownloader.downloadDependencies(getClassLoader().getResourceAsStream("META-INF" + File.separator + "dependencies.json"));
-        foundation = new Foundation(this);
+        foundation = new Foundation(getClassLoader(), getLogger());
         foundation.onEnable();
     }
 

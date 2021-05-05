@@ -3,18 +3,19 @@ package me.clutchy.foundation
 import me.clutchy.foundation.extensions.plus
 import me.clutchy.foundation.modules.ModuleHandler
 import org.bukkit.ChatColor
+import java.util.logging.Logger
 
-class Foundation(private val foundation: FoundationStartup) {
+class Foundation(classLoader: ClassLoader, private val logger: Logger) {
 
-    private val modules = ModuleHandler(foundation.javaClass.classLoader, foundation.logger)
+    private val modules = ModuleHandler(classLoader, logger)
 
     fun onEnable() {
-        foundation.logger.info(ChatColor.GREEN + "Enabled Kotlin")
+        logger.info(ChatColor.GREEN + "Enabled Kotlin")
         modules.loadModules()
     }
 
     fun onDisable() {
-        foundation.logger.info(ChatColor.RED + "Disabled Kotlin")
+        logger.info(ChatColor.RED + "Disabled Kotlin")
         modules.disableModules()
     }
 }
