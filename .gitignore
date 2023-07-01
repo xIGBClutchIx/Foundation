@@ -7,5 +7,8 @@ build
 # Ignore IntelliJ workspace
 .idea
 
+# Ignore IntelliJ output folder if not changed
+out
+
 # Ignore debug server
 server

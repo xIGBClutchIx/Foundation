@@ -10,8 +10,8 @@ repositories {
 }
 
 dependencies {
-    compileOnly("io.papermc.paper:paper-api:1.20.1-R0.1-SNAPSHOT")
-    compileOnly("org.spigotmc:plugin-annotations:1.2.3-SNAPSHOT")
+    api("io.papermc.paper:paper-api:1.20.1-R0.1-SNAPSHOT")
+    implementation("org.spigotmc:plugin-annotations:1.2.3-SNAPSHOT")
     kapt("org.spigotmc:plugin-annotations:1.2.3-SNAPSHOT")
 }
 
