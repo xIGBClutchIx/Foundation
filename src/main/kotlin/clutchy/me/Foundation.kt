@@ -14,7 +14,7 @@ import org.bukkit.plugin.java.annotation.plugin.author.Author
 @Author("Clutch")
 @Website("https://clutchy.me")
 @ApiVersion(ApiVersion.Target.v1_20)
-@Libraries(value = [Library("org.jetbrains.kotlin:kotlin-stdlib-kd8:1.8.22")])
+@Libraries(value = [Library("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.22")])
 class Foundation: JavaPlugin() {
 
     override fun onLoad() {

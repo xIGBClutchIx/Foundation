@@ -6,3 +6,6 @@ build
 
 # Ignore IntelliJ workspace
 .idea
+
+# Ignore debug server
+server
