@@ -1,7 +1,7 @@
 package clutchy.me.foundation
 
-import clutchy.me.foundation.extensions.error
 import clutchy.me.foundation.extensions.*
+
 import org.bukkit.plugin.java.JavaPlugin
 import org.bukkit.plugin.java.annotation.dependency.Libraries
 import org.bukkit.plugin.java.annotation.dependency.Library
@@ -20,6 +20,7 @@ import org.bukkit.plugin.java.annotation.plugin.author.Author
 class Foundation: JavaPlugin() {
 
     override fun onLoad() {
+
     }
 
     override fun onEnable() {
@@ -27,6 +28,7 @@ class Foundation: JavaPlugin() {
         "Warning".warning()
         "Error".error()
         "Debug".debug()
+        addListener(PlayerListener())
     }
 
     override fun onDisable() {
